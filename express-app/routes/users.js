@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+let curId = 2;
 const users = {
   items: [
     { id: 1, name: "Лиза" },
@@ -12,6 +13,7 @@ router.get('/', function(req, res, next) {
   res.send(users.items.map(item => item.name));
 });
 
+<<<<<<< HEAD
 /* GET user by id. */
 router.get('/:id', function(req, res, next) {
   const id = Number(req.params.id);
@@ -22,6 +24,15 @@ router.get('/:id', function(req, res, next) {
   }
 
   res.json(user);
+=======
+router.post('/', function(req, res, next) {
+  const {name} = req.body;
+  const newUser = {id: curId++, name: name}
+  users.items.push(newUser);
+  
+  res.status(201).json(newUser);
+  res.send(newUser);
+>>>>>>> c67d558b4140d8b4ae9ac7ee9cad5dc1bba2736a
 });
 
 module.exports = router;
