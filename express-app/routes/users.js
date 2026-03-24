@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+
 let curId = 2;
 const users = {
   items: [
@@ -8,14 +9,11 @@ const users = {
   ]
 };
 
-/* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.send(users.items.map(item => item.name));
+router.get('/', function(req, res) {
+  res.json({ items: users.items });
 });
 
-<<<<<<< HEAD
-/* GET user by id. */
-router.get('/:id', function(req, res, next) {
+router.get('/:id', function(req, res) {
   const id = Number(req.params.id);
   const user = users.items.find((item) => item.id === id);
 
@@ -24,15 +22,15 @@ router.get('/:id', function(req, res, next) {
   }
 
   res.json(user);
-=======
-router.post('/', function(req, res, next) {
-  const {name} = req.body;
-  const newUser = {id: curId++, name: name}
+});
+
+router.post('/', function(req, res) {
+  const { name } = req.body;
+
+  const newUser = { id: ++curId, name };
   users.items.push(newUser);
-  
+
   res.status(201).json(newUser);
-  res.send(newUser);
->>>>>>> c67d558b4140d8b4ae9ac7ee9cad5dc1bba2736a
 });
 
 module.exports = router;
